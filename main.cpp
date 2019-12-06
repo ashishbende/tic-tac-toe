@@ -1,6 +1,3 @@
-#include<iostream>
+#include <iostream>
 
-int main(){
-
-    return EXIT_SUCCESS;
-}
+int main() { return EXIT_SUCCESS; }
