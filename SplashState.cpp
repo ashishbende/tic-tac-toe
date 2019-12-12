@@ -1,5 +1,6 @@
 #include "SplashState.hpp"
 #include "Definitions.hpp"
+#include "MainMenuState.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -8,7 +9,7 @@ SplashState::SplashState(GameDataRef data) : _data(data) {}
 
 void SplashState::Init() {
   _data->assets.LoadTexture("Splash State Background",
-                         SPLASH_SCENE_BACKGROUND_FILEPATH);
+                            SPLASH_SCENE_BACKGROUND_FILEPATH);
   _background.setTexture(_data->assets.GetTexture("Splash State Background"));
 }
 
@@ -26,6 +27,7 @@ void SplashState::Update(float dt) {
   if (_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME) {
     // go back to main menu
     std::cout << "Go to main menu" << std::endl;
+    _data->machine.AddState(StateRef(new MainMenuState(_data)), true);
   }
 }
 

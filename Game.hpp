@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
-#include<iostream>
 
 namespace TicTacToe {
 struct GameData {
