@@ -3,6 +3,6 @@
 #include <iostream>
 
 int main() {
-  TicTacToe::Game(SCREEN_WIDTH, SCREEN_HEIGHT, "TicTacToe");
+  TicTacToe::Game(SCREEN_WIDTH,SCREEN_HEIGHT,std::string("TicTacToe"));
   return EXIT_SUCCESS;
 }

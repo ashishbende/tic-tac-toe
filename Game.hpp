@@ -4,7 +4,6 @@
 #include "StateMachine.hpp"
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include <string>
 
 namespace TicTacToe {
 struct GameData {
@@ -19,6 +18,8 @@ typedef std::shared_ptr<GameData> GameDataRef;
 class Game {
 public:
   Game(int width, int height, std::string title);
+  Game(const Game &) = delete;
+  Game() = delete;
 
 private:
   const float dt = 1.0f / 60.0f;
