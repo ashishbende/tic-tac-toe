@@ -9,6 +9,7 @@
 #define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/Main Menu Background.png"
 #define GAME_BACKGROUND_FILEPATH "Resources/res/Main Menu Background.png"
 #define PAUSE_BACKGROUND_FILEPATH "Resources/res/Main Menu Background.png"
+#define GRID_SPRITE_FILEPATH "Resources/res/Grid.png"
 
 #define MAIN_MENU_TITLE_PATH "Resources/res/Game Title.png"
 
