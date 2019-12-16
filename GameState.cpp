@@ -62,6 +62,12 @@ void GameState::HandleInput() {
 
 void GameState::Update(float dt) {
   // need to add some animation
+  if (STATE_DRAW == gameState || STATE_LOSE == gameState ||
+      STATE_WON == gameState) {
+    if (_clock.getElapsedTime().asSeconds() > TIME_BEFORE_SHOWING_GAME_OVER) {
+      _data->machine.AddState(StateRef(new GameOverState(_data)), true);
+    }
+  }
 }
 
 void GameState::Draw(float dt) {
@@ -177,6 +183,7 @@ void GameState::CheckPlayerHasWon(int player) {
   if (STATE_DRAW == gameState || STATE_LOSE == gameState ||
       STATE_WON == gameState) {
     // show gameover!
+    _clock.restart();
   }
 
   std::cout << gameState << std::endl;
