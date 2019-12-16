@@ -11,6 +11,7 @@ GameState::GameState(GameDataRef data) : _data(data) {}
 void GameState::Init() {
   gameState = STATE_PLAYING;
   turn = PLAYER_PIECE;
+  ai = new AI(turn, _data);
 
   _data->assets.LoadTexture("Pause Button", PAUSE_BUTTON);
   _data->assets.LoadTexture("Grid Sprite", GRID_SPRITE_FILEPATH);
@@ -129,12 +130,6 @@ void GameState::CheckAndPlacePiece() {
       _gridPieces[column - 1][row - 1].setTexture(
           _data->assets.GetTexture("X Piece"));
     CheckPlayerHasWon(turn);
-    turn = AI_PIECE;
-  } else if (PLAYER_PIECE == turn) {
-    _gridPieces[column - 1][row - 1].setTexture(
-        _data->assets.GetTexture("O Piece"));
-    CheckPlayerHasWon(turn);
-    turn = PLAYER_PIECE;
   }
   _gridPieces[column - 1][row - 1].setColor(sf::Color(255, 255, 255, 255));
 }
@@ -148,6 +143,21 @@ void GameState::CheckPlayerHasWon(int player) {
   Check3PiecesForMatch(2, 0, 2, 1, 2, 2, player);
   Check3PiecesForMatch(0, 0, 1, 1, 2, 2, player);
   Check3PiecesForMatch(0, 2, 1, 1, 2, 0, player);
+
+  // if above methods hasn't retured true
+  if (STATE_WON != gameState) {
+    gameState = STATE_AI_PLAYING;
+    ai->PlacePiece(&gridArray, _gridPieces, &gameState);
+
+    Check3PiecesForMatch(0, 0, 1, 0, 2, 0, AI_PIECE);
+    Check3PiecesForMatch(0, 1, 1, 1, 2, 1, AI_PIECE);
+    Check3PiecesForMatch(0, 2, 1, 2, 2, 2, AI_PIECE);
+    Check3PiecesForMatch(0, 0, 0, 1, 0, 2, AI_PIECE);
+    Check3PiecesForMatch(1, 0, 1, 1, 1, 2, AI_PIECE);
+    Check3PiecesForMatch(2, 0, 2, 1, 2, 2, AI_PIECE);
+    Check3PiecesForMatch(0, 0, 1, 1, 2, 2, AI_PIECE);
+    Check3PiecesForMatch(0, 2, 1, 1, 2, 0, AI_PIECE);
+  }
 
   int emptyNum = 9;
   for (int x = 0; x < 3; x++) {
