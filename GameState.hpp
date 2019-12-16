@@ -34,5 +34,6 @@ private:
   int gameState;
   int gridArray[3][3];
   AI *ai;
+  sf::Clock _clock;
 };
 } // namespace TicTacToe
